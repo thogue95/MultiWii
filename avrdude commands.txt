@@ -1,0 +1,61 @@
+
+
+
+avrdude cli commands
+
+to verify avrdude is commmunicating with the USBasp
+c:\somepath\avrdude.exe -c usbasp -p m2560 t
+now enter "part" at the avrdude prompt to get a dump of the microcontroller details
+
+avrdude>part
+
+Should dump details of the microcontroller
+
+avrdude> part
+>>> part
+
+AVR Part                      : ATMEGA2560
+Chip Erase delay              : 9000 us
+PAGEL                         : PD7
+BS2                           : PA0
+RESET disposition             : dedicated
+RETRY pulse                   : SCK
+serial program mode           : yes
+parallel program mode         : yes
+Timeout                       : 200
+StabDelay                     : 100
+CmdexeDelay                   : 25
+SyncLoops                     : 32
+ByteDelay                     : 0
+PollIndex                     : 3
+PollValue                     : 0x53
+Memory Detail                 :
+
+                         Block Poll               Page                       Polled
+  Memory Type Mode Delay Size  Indx Paged  Size   Size #Pages MinW  MaxW   ReadBack
+  ----------- ---- ----- ----- ---- ------ ------ ---- ------ ----- ----- ---------
+  eeprom        65    10     8    0 no       4096    8      0  9000  9000 0x00 0x00
+  flash         65    10   256    0 yes    262144  256   1024  4500  4500 0x00 0x00
+  lfuse          0     0     0    0 no          1    0      0  9000  9000 0x00 0x00
+  hfuse          0     0     0    0 no          1    0      0  9000  9000 0x00 0x00
+  efuse          0     0     0    0 no          1    0      0  9000  9000 0x00 0x00
+  lock           0     0     0    0 no          1    0      0  9000  9000 0x00 0x00
+  calibration    0     0     0    0 no          1    0      0     0     0 0x00 0x00
+  signature      0     0     0    0 no          3    0      0     0     0 0x00 0x00
+
+avrdude> dump eeprom
+>>> dump eeprom
+0000  00 db ff de ff ec ff 06  00 42 ff 31 00 00 00 6f  |.........B.1...o|
+0010  21 1e 17 21 1e 17 44 2d  00 40 19 18 0f 00 00 22  |!..!..D-.@....."|
+0020  0e 35 19 21 53 5a 0a 64  28 fa 64 00 00 00 5a 41  |.5.!SZ d(.d...ZA|
+0030  00 00 00 32 00 00 00 00  00 10 00 00 00 18 00 10  |...2............|
+
+
+commands to upload new firmware
+
+change to the directory where the stk500boot_v2_mega2560.hex file is located.  Replace "somepath" to the actual path where you have avrdude.exe located.  On my Windows 10, those files are in C:\WinAVR-20100110\bin directory.  Search your system to find the correct path.
+
+c:\somepath\avrdude.exe -c usbasp -p m2560 -P usb -b 115200 -e -u -U lock:w:0x3F:m -U efuse:w:0xFD:m -U hfuse:w:0xD8:m -U efuse:w:0xFF:m
+c:\somepath\avrdude.exe -c usbasp -p m2560 -P usb -b 115200 -V -U flash:w:stk500boot_v2_mega2560.hex
+c:\somepath\avrdude.exe -c usbasp -p m2560 -P usb -b 115200 -U lock:w:0x0F:m
+
