@@ -6,3 +6,15 @@ The Runner Config file is a starting point for loading PIDs for the Runners.  Yo
 The stk500v2 boot loader for the ATmega2560 is here as a convience.  It is not modified and can be found in other locations.
 Basic Runner owners should comment out the GPS and Compass as this will reduce the I2C erros you will see on the MultiWii GUI.
 Enjoy!
+
+
+Some suggested sites for questions:
+
+MultiWii Forum (tons of MW 2.4 help but not specific to Walkera)
+http://www.multiwii.com/forum/index.php
+
+Walkera 250 Support Facebook Page (All kinds of Walkera 250 Support) - I tend to watch this one closely
+https://www.facebook.com/groups/runner250support/
+
+Offical Walkera Forumn (Will not help you with the MW 2.4 Firmware)
+http://www.walkeraforums.com/
